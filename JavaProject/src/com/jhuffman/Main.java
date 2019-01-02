@@ -2,23 +2,49 @@ package com.jhuffman;
 
 public class Main
 {
-    private static HelloWorldPrinter helloWorldPrinter;
+    private static Level loadedLevel;
 
     public static void main(String[] args)
     {
-        Level level = new Level();
-        boolean isLevelLoaded = level.LoadLevelFromFile("./LevelFile.txt");
+        ClearScreen();
 
-        if(isLevelLoaded)
+        loadedLevel = new Level();
+        boolean isLevelLoaded = loadedLevel.LoadLevelFromFile("./LevelFile.txt");
+
+        if (isLevelLoaded)
         {
-            level.DrawLevel();
+            RunUpdateLoop();
         }
         else
         {
             System.out.print("Level failed to load.");
         }
+    }
 
-        WaitForEnterToContinue();
+    private static void RunUpdateLoop()
+    {
+        while (true)
+        {
+            Update();
+        }
+    }
+
+    private static void Update()
+    {
+        ClearScreen();
+        loadedLevel.DrawLevel();
+    }
+
+    private static void ClearScreen()
+    {
+        try
+        {
+            // This should clear the console window of any output we had previously printed
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private static void WaitForEnterToContinue()
