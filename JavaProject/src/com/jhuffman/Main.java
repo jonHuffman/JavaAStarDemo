@@ -1,5 +1,7 @@
 package com.jhuffman;
 
+import java.util.concurrent.TimeUnit;
+
 public class Main
 {
     private static Level loadedLevel;
@@ -23,9 +25,29 @@ public class Main
 
     private static void RunUpdateLoop()
     {
+        // Length of a frame in milliseconds for the 30fps target
+        long frameLength = 1 / 30 * 1000;
+
         while (true)
         {
+            long updateStart = System.currentTimeMillis();
+
             Update();
+
+            long updateEnd = System.currentTimeMillis();
+            long elapsedTime = updateEnd - updateStart;
+            long remainingTime = frameLength - elapsedTime;
+
+            if(remainingTime > 0)
+            {
+                try
+                {
+                    TimeUnit.MILLISECONDS.sleep(remainingTime);
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
