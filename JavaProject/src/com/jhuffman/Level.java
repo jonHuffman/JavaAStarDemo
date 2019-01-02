@@ -8,7 +8,9 @@ import java.util.stream.Stream;
 
 public class Level
 {
-    List<List<Tile>> tiles;
+    public Tile agentTile;
+
+    private List<List<Tile>> tiles;
 
     // The function that shares the same name as the Class is called the constructor.
     // It is the function that you call when you want to Instantiate an instance of your class.
@@ -33,6 +35,16 @@ public class Level
         return true;
     }
 
+    public Tile GetTileAt(int X, int Y)
+    {
+        if(Y >= tiles.size() ||X > tiles.get(Y).size())
+        {
+            return null;
+        }
+
+        return tiles.get(Y).get(X);
+    }
+
     public void DrawLevel()
     {
         for (int i = 0; i < tiles.size(); i++)
@@ -52,6 +64,8 @@ public class Level
             // Create a new Tile object for the character
             char tileData = tileRow.charAt(i);
             Tile newTile = new Tile(tileData);
+            newTile.location.X = i;
+            newTile.location.Y = Clamp(tiles.size() - 1, 0, Integer.MAX_VALUE);
 
             // Get the neighbours that may exist for this tile, and link them to this tile.
             Tile westNeighbour = GetWesternNeighbour(i, newRow);
@@ -60,6 +74,11 @@ public class Level
 
             // Add the new Tile object as an entry in the new List of Tiles we created
             newRow.add(newTile);
+
+            if(newTile.containsAgent)
+            {
+                agentTile = newTile;
+            }
         }
 
         tiles.add(newRow);
@@ -113,5 +132,19 @@ public class Level
             tileRow.get(i).DrawTile();
         }
         System.out.println();
+    }
+
+    private int Clamp(int value, int min, int max)
+    {
+        if(value < min)
+        {
+            value = min;
+        }
+        else if(value > max)
+        {
+            value = max;
+        }
+
+        return value;
     }
 }

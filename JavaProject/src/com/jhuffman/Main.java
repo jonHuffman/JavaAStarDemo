@@ -6,9 +6,14 @@ public class Main
 {
     private static Level loadedLevel;
 
+    private static boolean isNavigatingPath;
+    private static int currentPathStep;
+
     public static void main(String[] args)
     {
         ClearScreen();
+
+        isNavigatingPath = false;
 
         loadedLevel = new Level();
         boolean isLevelLoaded = loadedLevel.LoadLevelFromFile("./LevelFile.txt");
@@ -25,8 +30,8 @@ public class Main
 
     private static void RunUpdateLoop()
     {
-        // Length of a frame in milliseconds for the 30fps target
-        long frameLength = 1 / 30 * 1000;
+        // 4fps, because console windows look bad when trying to render too fast
+        long frameLength = 250;
 
         while (true)
         {
@@ -38,7 +43,7 @@ public class Main
             long elapsedTime = updateEnd - updateStart;
             long remainingTime = frameLength - elapsedTime;
 
-            if(remainingTime > 0)
+            if (remainingTime > 0)
             {
                 try
                 {
@@ -54,6 +59,27 @@ public class Main
     private static void Update()
     {
         ClearScreen();
+
+        if (isNavigatingPath)
+        {
+            loadedLevel.agentTile.containsAgent = false;
+
+            if(currentPathStep < Pathfinder.path.size())
+            {
+                loadedLevel.agentTile = Pathfinder.path.get(currentPathStep++);
+                loadedLevel.agentTile.containsAgent = true;
+            }
+            else
+            {
+                isNavigatingPath = false;
+            }
+        }
+        else
+        {
+            isNavigatingPath = Pathfinder.FindPath(loadedLevel.agentTile, loadedLevel.GetTileAt(9, 9));
+            currentPathStep = 0;
+        }
+
         loadedLevel.DrawLevel();
     }
 

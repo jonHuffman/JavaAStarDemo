@@ -1,5 +1,8 @@
 package com.jhuffman;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tile
 {
     public enum TileType
@@ -11,6 +14,7 @@ public class Tile
     public TileType tileType;
     public boolean containsAgent;
     public Neighbours neighbours;
+    public Point location;
 
     // Constructors can have parameters just like any function.
     // We can use these parameters to set some of the values in our object.
@@ -18,6 +22,7 @@ public class Tile
     {
         containsAgent = false;
         neighbours = new Neighbours();
+        location = new Point();
 
         try
         {
@@ -48,6 +53,33 @@ public class Tile
                 System.out.print('?');
         }
 
+    }
+
+    public List<Tile> GetOpenNeighbourTiles()
+    {
+        List<Tile> openNeighbours = new ArrayList<Tile>();
+
+        if(neighbours.north != null && neighbours.north.tileType == TileType.Open)
+        {
+            openNeighbours.add(neighbours.north);
+        }
+
+        if(neighbours.east != null && neighbours.east.tileType == TileType.Open)
+        {
+            openNeighbours.add(neighbours.east);
+        }
+
+        if(neighbours.south != null && neighbours.south.tileType == TileType.Open)
+        {
+            openNeighbours.add(neighbours.south);
+        }
+
+        if(neighbours.west != null && neighbours.west.tileType == TileType.Open)
+        {
+            openNeighbours.add(neighbours.west);
+        }
+
+        return openNeighbours;
     }
 
     private TileType ConvertCharToTileType(char tileData)
