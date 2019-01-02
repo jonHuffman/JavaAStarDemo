@@ -9,7 +9,11 @@ public class Main
         Level level = new Level();
         boolean isLevelLoaded = level.LoadLevelFromFile("./LevelFile.txt");
 
-        if(isLevelLoaded == false)
+        if(isLevelLoaded)
+        {
+            level.DrawLevel();
+        }
+        else
         {
             System.out.print("Level failed to load.");
         }

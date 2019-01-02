@@ -21,7 +21,7 @@ public class Level
         try (Stream<String> stream = Files.lines(Paths.get(fileName)))
         {
             // For each line in the file, pass the line in to the LoadTileRow function
-            stream.forEach(System.out::println);
+            stream.forEach(line -> LoadTileRow(line));
         }
         catch(Exception e)
         {
@@ -30,5 +30,36 @@ public class Level
         }
 
         return true;
+    }
+
+    public void DrawLevel()
+    {
+        for(int i = 0; i < tiles.size(); i++)
+        {
+            DrawRow(tiles.get(i));
+        }
+    }
+
+    private void LoadTileRow(String tileRow)
+    {
+        // Each row gets a new List of Tiles in the tiles array
+        tiles.add(new ArrayList<Tile>());
+
+        // Get each individual character in the tileRow and create a new Tile object for it
+        // Add the new Tile object as an entry in the new List of Tiles we created
+        for(int i = 0; i < tileRow.length(); i++)
+        {
+            char tileData = tileRow.charAt(i);
+            tiles.get(tiles.size() - 1).add(new Tile(tileData));
+        }
+    }
+
+    private void DrawRow(List<Tile> tileRow)
+    {
+        for(int i = 0; i < tileRow.size(); i++)
+        {
+            tileRow.get(i).DrawTile();
+        }
+        System.out.println();
     }
 }
