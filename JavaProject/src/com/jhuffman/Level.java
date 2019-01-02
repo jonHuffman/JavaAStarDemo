@@ -10,6 +10,8 @@ public class Level
 {
     List<List<Tile>> tiles;
 
+    // The function that shares the same name as the Class is called the constructor.
+    // It is the function that you call when you want to Instantiate an instance of your class.
     public Level()
     {
         tiles = new ArrayList<List<Tile>>();
@@ -22,8 +24,7 @@ public class Level
         {
             // For each line in the file, pass the line in to the LoadTileRow function
             stream.forEach(line -> LoadTileRow(line));
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
             return false;
@@ -34,7 +35,7 @@ public class Level
 
     public void DrawLevel()
     {
-        for(int i = 0; i < tiles.size(); i++)
+        for (int i = 0; i < tiles.size(); i++)
         {
             DrawRow(tiles.get(i));
         }
@@ -43,20 +44,71 @@ public class Level
     private void LoadTileRow(String tileRow)
     {
         // Each row gets a new List of Tiles in the tiles array
-        tiles.add(new ArrayList<Tile>());
+        List<Tile> newRow = new ArrayList<Tile>();
 
         // Get each individual character in the tileRow and create a new Tile object for it
-        // Add the new Tile object as an entry in the new List of Tiles we created
-        for(int i = 0; i < tileRow.length(); i++)
+        for (int i = 0; i < tileRow.length(); i++)
         {
+            // Create a new Tile object for the character
             char tileData = tileRow.charAt(i);
-            tiles.get(tiles.size() - 1).add(new Tile(tileData));
+            Tile newTile = new Tile(tileData);
+
+            // Get the neighbours that may exist for this tile, and link them to this tile.
+            Tile westNeighbour = GetWesternNeighbour(i, newRow);
+            Tile northNeighbour = GetNorthernNeighbour(i);
+            LinkNeighbourTiles(newTile, westNeighbour, northNeighbour);
+
+            // Add the new Tile object as an entry in the new List of Tiles we created
+            newRow.add(newTile);
+        }
+
+        tiles.add(newRow);
+    }
+
+    private Tile GetWesternNeighbour(int tileIndex, List<Tile> tileRow)
+    {
+        // If this is the second character in tileRow or greater, than there is a western neighbour
+        if (tileIndex >= 1)
+        {
+            return tileRow.get(tileIndex - 1);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private Tile GetNorthernNeighbour(int tileIndex)
+    {
+        if (tiles.size() - 1 > 0)
+        {
+            List<Tile> previousRow = tiles.get(tiles.size() - 1);
+            return previousRow.get(tileIndex);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private void LinkNeighbourTiles(Tile mainTile, Tile westNeighbour, Tile northNeighbour)
+    {
+        if (westNeighbour != null)
+        {
+            mainTile.neighbours.west = westNeighbour;
+            westNeighbour.neighbours.east = mainTile;
+        }
+
+        if (northNeighbour != null)
+        {
+            mainTile.neighbours.north = northNeighbour;
+            northNeighbour.neighbours.south = mainTile;
         }
     }
 
     private void DrawRow(List<Tile> tileRow)
     {
-        for(int i = 0; i < tileRow.size(); i++)
+        for (int i = 0; i < tileRow.size(); i++)
         {
             tileRow.get(i).DrawTile();
         }

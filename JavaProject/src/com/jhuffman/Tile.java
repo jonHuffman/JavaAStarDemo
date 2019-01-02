@@ -10,10 +10,14 @@ public class Tile
 
     public TileType tileType;
     public boolean containsAgent;
+    public Neighbours neighbours;
 
+    // Constructors can have parameters just like any function.
+    // We can use these parameters to set some of the values in our object.
     public Tile(char tileData)
     {
         containsAgent = false;
+        neighbours = new Neighbours();
 
         try
         {
@@ -26,11 +30,16 @@ public class Tile
 
     public void DrawTile()
     {
+        if (containsAgent)
+        {
+            System.out.print('¥');
+            return;
+        }
+
         switch (tileType)
         {
             case Blocked:
-                // ▓ character (extended ascii 178)
-                System.out.printf("%c", 0x2593);
+                System.out.print('▓');
                 break;
             case Open:
                 System.out.print(' ');
