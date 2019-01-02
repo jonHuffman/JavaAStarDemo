@@ -2,15 +2,23 @@ package com.jhuffman;
 
 public class Main
 {
+    private static HelloWorldPrinter helloWorldPrinter;
+
     public static void main(String[] args)
     {
-        System.out.println("Hello World!");
+        helloWorldPrinter = new HelloWorldPrinter();
+        helloWorldPrinter.Print();
+
+        WaitForEnterToContinue();
+    }
+
+    private static void WaitForEnterToContinue()
+    {
         System.out.print("Press enter to continue...");
         try
         {
             System.in.read();
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
