@@ -6,8 +6,13 @@ public class Main
 
     public static void main(String[] args)
     {
-        helloWorldPrinter = new HelloWorldPrinter();
-        helloWorldPrinter.Print();
+        Level level = new Level();
+        boolean isLevelLoaded = level.LoadLevelFromFile("./LevelFile.txt");
+
+        if(isLevelLoaded == false)
+        {
+            System.out.print("Level failed to load.");
+        }
 
         WaitForEnterToContinue();
     }
