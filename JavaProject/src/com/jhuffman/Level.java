@@ -8,6 +8,10 @@ import java.util.stream.Stream;
 
 public class Level
 {
+    // We won't make these public because we don't want anything else to be able to modify them
+    private int width = -1;
+    private int height = -1;
+
     private Tile occupiedTile;
     private List<List<Tile>> tiles;
 
@@ -32,12 +36,24 @@ public class Level
             return false;
         }
 
+        height = tiles.size();
+
         return true;
+    }
+
+    public int GetLevelWidth()
+    {
+        return width;
+    }
+
+    public int GetLevelHeight()
+    {
+        return height;
     }
 
     public Tile GetTileAt(int X, int Y)
     {
-        if(Y >= tiles.size() ||X > tiles.get(Y).size())
+        if(Y < 0 || X < 0 || Y >= tiles.size() || X > tiles.get(Y).size())
         {
             return null;
         }
@@ -93,7 +109,23 @@ public class Level
             }
         }
 
+        VerifyRowMeetsSizeRequirements(newRow);
+
         tiles.add(newRow);
+    }
+
+    private void VerifyRowMeetsSizeRequirements(List<Tile> row)
+    {
+        if(width == -1)
+        {
+            width = row.size();
+        }
+
+        if(row.size() != width)
+        {
+            System.out.println("All rows in a level must be the same width!");
+            System.exit(-1);
+        }
     }
 
     private Tile GetWesternNeighbour(int tileIndex, List<Tile> tileRow)

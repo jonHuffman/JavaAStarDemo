@@ -1,12 +1,15 @@
 package com.jhuffman;
 
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Main
 {
     private static Level loadedLevel;
     private static LinkedList<Tile> path;
+
+    private static Random randomNumberGenerator;
 
     public static void main(String[] args)
     {
@@ -16,6 +19,9 @@ public class Main
         boolean isLevelLoaded = loadedLevel.LoadLevelFromFile("./LevelFile.txt");
 
         path = new LinkedList<>();
+
+        // Its important to seed your Random object so that you get good random values
+        randomNumberGenerator = new Random(System.currentTimeMillis());
 
         if (isLevelLoaded)
         {
@@ -70,10 +76,32 @@ public class Main
         else
         {
             Tile tileWithAgent = loadedLevel.GetCurrentOccupiedTile();
-            path = Pathfinder.FindPath(tileWithAgent, loadedLevel.GetTileAt(9, 9));
+            path = Pathfinder.FindPath(tileWithAgent, GetNewDestination());
         }
 
         loadedLevel.DrawLevel();
+    }
+
+    private static Tile GetNewDestination()
+    {
+        int x;
+        int y;
+        Tile newDestination = null;
+
+        while(newDestination == null)
+        {
+            x = randomNumberGenerator.nextInt(loadedLevel.GetLevelWidth());
+            y = randomNumberGenerator.nextInt(loadedLevel.GetLevelHeight());
+
+            Tile potentialDestination = loadedLevel.GetTileAt(x, y);
+
+            if(potentialDestination != null && potentialDestination.tileType == Tile.TileType.Walkable)
+            {
+                newDestination = potentialDestination;
+            }
+        }
+
+        return newDestination;
     }
 
     private static void ClearScreen()
