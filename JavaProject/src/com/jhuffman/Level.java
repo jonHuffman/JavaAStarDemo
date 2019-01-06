@@ -25,7 +25,8 @@ public class Level
         {
             // For each line in the file, pass the line in to the LoadTileRow function
             stream.forEach(line -> LoadTileRow(line));
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
             return false;

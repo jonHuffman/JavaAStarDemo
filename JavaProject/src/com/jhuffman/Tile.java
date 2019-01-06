@@ -1,13 +1,12 @@
 package com.jhuffman;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Tile
 {
     public enum TileType
     {
-        Open,
+        Walkable,
         Blocked
     }
 
@@ -46,7 +45,7 @@ public class Tile
             case Blocked:
                 System.out.print('▓');
                 break;
-            case Open:
+            case Walkable:
                 System.out.print(' ');
                 break;
             default:
@@ -55,31 +54,31 @@ public class Tile
 
     }
 
-    public ArrayList<Tile> GetOpenNeighbourTiles()
+    public ArrayList<Tile> GetWalkableNeighbourTiles()
     {
-        ArrayList<Tile> openNeighbours = new ArrayList<Tile>();
+        ArrayList<Tile> walkableNeighbours = new ArrayList<Tile>();
 
-        if(neighbours.north != null && neighbours.north.tileType == TileType.Open)
+        if(neighbours.north != null && neighbours.north.tileType == TileType.Walkable)
         {
-            openNeighbours.add(neighbours.north);
+            walkableNeighbours.add(neighbours.north);
         }
 
-        if(neighbours.east != null && neighbours.east.tileType == TileType.Open)
+        if(neighbours.east != null && neighbours.east.tileType == TileType.Walkable)
         {
-            openNeighbours.add(neighbours.east);
+            walkableNeighbours.add(neighbours.east);
         }
 
-        if(neighbours.south != null && neighbours.south.tileType == TileType.Open)
+        if(neighbours.south != null && neighbours.south.tileType == TileType.Walkable)
         {
-            openNeighbours.add(neighbours.south);
+            walkableNeighbours.add(neighbours.south);
         }
 
-        if(neighbours.west != null && neighbours.west.tileType == TileType.Open)
+        if(neighbours.west != null && neighbours.west.tileType == TileType.Walkable)
         {
-            openNeighbours.add(neighbours.west);
+            walkableNeighbours.add(neighbours.west);
         }
 
-        return openNeighbours;
+        return walkableNeighbours;
     }
 
     private TileType ConvertCharToTileType(char tileData)
@@ -89,10 +88,10 @@ public class Tile
             case '0':
                 return TileType.Blocked;
             case '1':
-                return TileType.Open;
+                return TileType.Walkable;
             case 'c':
                 containsAgent = true;
-                return TileType.Open;
+                return TileType.Walkable;
             default:
                 throw new IllegalArgumentException(tileData + " is an unrecognized level element.");
         }

@@ -65,14 +65,22 @@ public class Pathfinder
             AddCurrentTileNeighboursToOpenList();
 
             // If our openList is empty at this point, then no path has been found
-            // We'll return an empty LinkedList to signify this
+            // We'll return an empty LinkedList so the app can continue to run
             if(openList.size() == 0)
             {
                 return new LinkedList<>();
             }
 
             currentTile = GetNextTileInPath();
-        }while(currentTile != destinationTile);
+
+            // If we were unable to find the next step in the Path then we
+            // abort and return an empty LinkedList so the app can continue to run
+            if(currentTile == null)
+            {
+                return new LinkedList<>();
+            }
+        }
+        while(currentTile != destinationTile);
 
         // Add the final tile we found, as it is our destination
         path.addLast(currentTile);
@@ -92,7 +100,7 @@ public class Pathfinder
 
     private static void AddCurrentTileNeighboursToOpenList()
     {
-        ArrayList<Tile> neighbourTiles = currentTile.GetOpenNeighbourTiles();
+        ArrayList<Tile> neighbourTiles = currentTile.GetWalkableNeighbourTiles();
         for(int i = 0; i < neighbourTiles.size(); i++)
         {
             Tile neighbour = neighbourTiles.get(i);
@@ -124,27 +132,60 @@ public class Pathfinder
     private static Tile GetNextTileInPath()
     {
         Tile bestNextTile = null;
-        for(int i = 0; i < openList.size(); i++)
-        {
-            Tile tile = openList.get(i);
+        ArrayList<Tile> neighbourTiles;
+        int furthestValidTileIndex = path.indexOf(currentTile);
 
-            // If this tile is the destination, then we have found our goal
-            // and know that this should be the next Tile in the path
-            if(tile == destinationTile)
+        do
+        {
+            // In the furthestValidTileIndex goes below 0 it means that we have run out
+            // of possible viable tiles in the path. This means there is no path to find.
+            if(furthestValidTileIndex < 0)
             {
-                return tile;
+                return null;
             }
 
+            neighbourTiles = path.get(furthestValidTileIndex).GetWalkableNeighbourTiles();
+
+            for (int i = 0; i < neighbourTiles.size(); i++)
+            {
+                Tile neighbour = neighbourTiles.get(i);
+
+                // This is the same as writing openList.contains(neighbour) == true
+                // contains returns true if it succeeds, so we don't NEED to do further checking
+                if (openList.contains(neighbour))
+                {
+                    if (neighbour == destinationTile)
+                    {
+                        return neighbour;
+                    }
+
+                    if (bestNextTile == null)
+                    {
+                        bestNextTile = neighbour;
+                    }
+                    else if (tileScore.get(neighbour) < tileScore.get(bestNextTile))
+                    {
+                        // If our tile has a lower score than it is more likely to take us
+                        // to our destination as fast as possible
+                        bestNextTile = neighbour;
+                    }
+                }
+            }
+
+            // If we have not yet found a tile, then we need to step backwards in our path and try a different fork
             if(bestNextTile == null)
             {
-                bestNextTile = tile;
+                furthestValidTileIndex--;
             }
-            else if(tileScore.get(tile) < tileScore.get(bestNextTile))
-            {
-                // If our tile has a lower score than it is more likely to take us
-                // to our destination as fast as possible
-                bestNextTile = tile;
-            }
+        }
+        while(bestNextTile == null);
+
+        // If our furthestValidTileIndex is not our currentTile then it means
+        // we ran into a dead end of some kind. We need to remove all steps
+        // in the path after the valid one that we back-tracked to
+        if(furthestValidTileIndex != path.indexOf(currentTile))
+        {
+            path.subList(furthestValidTileIndex + 1, path.size()).clear();
         }
 
         return bestNextTile;
