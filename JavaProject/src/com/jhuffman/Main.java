@@ -30,7 +30,7 @@ public class Main
     private static void RunUpdateLoop()
     {
         // 4fps, because console windows look bad when trying to render too fast
-        long frameLength = 250;
+        long frameLength = 125;
 
         while (true)
         {

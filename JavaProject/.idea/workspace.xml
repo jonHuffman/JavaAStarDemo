@@ -7,9 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a98bd7a-eca7-4d89-b118-35cf014345d3" name="Default Changelist" comment="Re-factored Hello World implementation so that it is within its own class.">
-      <change beforePath="$PROJECT_DIR$/src/com/jhuffman/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jhuffman/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jhuffman/Pathfinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jhuffman/Pathfinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/jhuffman/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jhuffman/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/JavaProject_jar/LevelFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/JavaProject_jar/LevelFile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/jhuffman/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jhuffman/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="367">
+              <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,8 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Pathfinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="146" column="76" selection-start-line="146" selection-start-column="76" selection-end-line="146" selection-end-column="76" />
+            <state relative-caret-position="-1214">
+              <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -44,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="30" selection-end-column="32" />
+            <state relative-caret-position="275">
+              <caret line="143" column="29" selection-start-line="143" selection-start-column="29" selection-end-line="143" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1426#1427#0" expanded="true" />
@@ -55,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Tile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+            <state relative-caret-position="394">
+              <caret line="45" column="35" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="35" />
               <folding>
                 <element signature="e#1261#1267#0" expanded="true" />
               </folding>
@@ -95,10 +95,10 @@
         <option value="$PROJECT_DIR$/src/com/jhuffman/HelloWorldPrinter.java" />
         <option value="$PROJECT_DIR$/src/com/jhuffman/Neighbours.java" />
         <option value="$PROJECT_DIR$/src/com/jhuffman/Point.java" />
-        <option value="$PROJECT_DIR$/src/com/jhuffman/Main.java" />
         <option value="$PROJECT_DIR$/src/com/jhuffman/Level.java" />
         <option value="$PROJECT_DIR$/src/com/jhuffman/Pathfinder.java" />
         <option value="$PROJECT_DIR$/src/com/jhuffman/Tile.java" />
+        <option value="$PROJECT_DIR$/src/com/jhuffman/Main.java" />
       </list>
     </option>
   </component>
@@ -161,7 +161,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546795313549" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546796369865" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -250,8 +250,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27410617" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3997833" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27410617" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -273,18 +273,6 @@
     <MESSAGE value="Re-factored Hello World implementation so that it is within its own class." />
     <option name="LAST_COMMIT_MESSAGE" value="Re-factored Hello World implementation so that it is within its own class." />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/jhuffman/Pathfinder.java</url>
-          <line>60</line>
-          <properties />
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/jhuffman/HelloWorld.java" />
     <entry file="file://$PROJECT_DIR$/src/com/jhuffman/HelloWorldPrinter.java" />
@@ -302,10 +290,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Pathfinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1214">
+          <caret line="55" column="46" selection-start-line="55" selection-start-column="46" selection-end-line="55" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="30" selection-end-column="32" />
+        <state relative-caret-position="275">
+          <caret line="143" column="29" selection-start-line="143" selection-start-column="29" selection-end-line="143" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1426#1427#0" expanded="true" />
@@ -314,29 +309,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="394">
+          <caret line="45" column="35" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="35" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1261#1267#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Pathfinder.java">
+    <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="146" column="76" selection-start-line="146" selection-start-column="76" selection-end-line="146" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/jhuffman/Tile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        <state relative-caret-position="367">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
           <folding>
-            <element signature="e#1261#1267#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
