@@ -8,8 +8,7 @@ import java.util.stream.Stream;
 
 public class Level
 {
-    public Tile agentTile;
-
+    private Tile occupiedTile;
     private List<List<Tile>> tiles;
 
     // The function that shares the same name as the Class is called the constructor.
@@ -45,6 +44,18 @@ public class Level
         return tiles.get(Y).get(X);
     }
 
+    public void MoveAgentToTile(Tile newOccupiedTile)
+    {
+        occupiedTile.containsAgent = false;
+        occupiedTile = newOccupiedTile;
+        occupiedTile.containsAgent = true;
+    }
+
+    public Tile GetCurrentOccupiedTile()
+    {
+        return occupiedTile;
+    }
+
     public void DrawLevel()
     {
         for (int i = 0; i < tiles.size(); i++)
@@ -77,7 +88,7 @@ public class Level
 
             if(newTile.containsAgent)
             {
-                agentTile = newTile;
+                occupiedTile = newTile;
             }
         }
 

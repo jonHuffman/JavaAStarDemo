@@ -1,22 +1,21 @@
 package com.jhuffman;
 
+import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 public class Main
 {
     private static Level loadedLevel;
-
-    private static boolean isNavigatingPath;
-    private static int currentPathStep;
+    private static LinkedList<Tile> path;
 
     public static void main(String[] args)
     {
         ClearScreen();
 
-        isNavigatingPath = false;
-
         loadedLevel = new Level();
         boolean isLevelLoaded = loadedLevel.LoadLevelFromFile("./LevelFile.txt");
+
+        path = new LinkedList<>();
 
         if (isLevelLoaded)
         {
@@ -60,24 +59,18 @@ public class Main
     {
         ClearScreen();
 
-        if (isNavigatingPath)
+        if (path.size() > 0)
         {
-            loadedLevel.agentTile.containsAgent = false;
+            // I am treating the LinkedList like a Queue, I get the first Tile in it,
+            // and all the rest of the Tiles "move up" in the queue
+            Tile nextTileInPath = path.removeFirst();
 
-            if(currentPathStep < Pathfinder.path.size())
-            {
-                loadedLevel.agentTile = Pathfinder.path.get(currentPathStep++);
-                loadedLevel.agentTile.containsAgent = true;
-            }
-            else
-            {
-                isNavigatingPath = false;
-            }
+            loadedLevel.MoveAgentToTile(nextTileInPath);
         }
         else
         {
-            isNavigatingPath = Pathfinder.FindPath(loadedLevel.agentTile, loadedLevel.GetTileAt(9, 9));
-            currentPathStep = 0;
+            Tile tileWithAgent = loadedLevel.GetCurrentOccupiedTile();
+            path = Pathfinder.FindPath(tileWithAgent, loadedLevel.GetTileAt(9, 9));
         }
 
         loadedLevel.DrawLevel();

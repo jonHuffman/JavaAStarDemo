@@ -55,9 +55,9 @@ public class Tile
 
     }
 
-    public List<Tile> GetOpenNeighbourTiles()
+    public ArrayList<Tile> GetOpenNeighbourTiles()
     {
-        List<Tile> openNeighbours = new ArrayList<Tile>();
+        ArrayList<Tile> openNeighbours = new ArrayList<Tile>();
 
         if(neighbours.north != null && neighbours.north.tileType == TileType.Open)
         {
